@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innovative Precision Technologies</title>
+  <style>
+    :root {
+      --bg: #0f1724;
+      --bg-deep: #111827;
+      --bg-panel: rgba(18, 27, 42, 0.78);
+      --bg-panel-soft: rgba(23, 36, 56, 0.68);
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-2: rgba(255, 255, 255, 0.035);
+      --border: rgba(125, 148, 185, 0.22);
+      --border-strong: rgba(147, 197, 253, 0.28);
+      --blue: #2563eb;
+      --blue-bright: #60a5fa;
+      --blue-soft: #93c5fd;
+      --gold: #c9a227;
+      --gold-soft: #e3c86a;
+      --text: #eef4ff;
+      --text-soft: rgba(226, 236, 255, 0.78);
+      --text-dim: rgba(226, 236, 255, 0.62);
+      --shadow: 0 22px 55px rgba(2, 8, 23, 0.42);
+      --radius: 26px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.55;
+    }
+
+    [id] {
+      scroll-margin-top: 110px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10, 17, 28, 0.86), rgba(13, 24, 38, 0.78) 18%, rgba(15, 23, 36, 0.82) 45%, rgba(8, 14, 24, 0.9)),
+        url("assets/background-stars-swish.png") center top / cover no-repeat;
+      z-index: -3;
+      transform: scale(1.02);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.10), transparent 28%),
+        radial-gradient(circle at 18% 20%, rgba(37, 99, 235, 0.08), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(201, 162, 39, 0.04), transparent 22%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .page-shell { position: relative; z-index: 1; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(10, 18, 31, 0.9), rgba(10, 18, 31, 0.68));
+      border-bottom: 1px solid rgba(147, 197, 253, 0.14);
+    }
+
+    .topbar-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+      padding: 14px 0;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark strong {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .brand-mark span {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav a:hover { color: var(--blue-soft); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.34);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.26), rgba(37, 99, 235, 0.12));
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(37, 99, 235, 0.14);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(147, 197, 253, 0.58);
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.20);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.34), rgba(37, 99, 235, 0.16));
+    }
+
+    .hero { padding: 72px 0 48px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .glass-card {
+      background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-soft));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-copy {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 620px;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--blue-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      max-width: 18ch;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      letter-spacing: -0.01em;
+    }
+
+    .hero-copy .lead {
+      color: var(--text-soft);
+      font-size: 1.08rem;
+      max-width: 60ch;
+      margin-bottom: 28px;
+    }
+
+    .slogan {
+      font-style: italic;
+      color: var(--blue-soft);
+      font-size: 1.04rem;
+      margin-bottom: 30px;
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .hero-note {
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid rgba(147, 197, 253, 0.14);
+      border-radius: 18px;
+    }
+
+    .hero-note strong {
+      color: var(--blue-soft);
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-note span {
+      color: var(--text-soft);
+      font-size: 0.88rem;
+    }
+
+    .hero-visual {
+      min-height: 620px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(10, 18, 31, 0.12), rgba(10, 18, 31, 0.38)),
+        url("assets/hero-commercial-building.png") center center / cover no-repeat;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      width: auto;
+      padding: 22px 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(147, 197, 253, 0.20);
+      background: linear-gradient(180deg, rgba(15, 23, 36, 0.78), rgba(15, 23, 36, 0.56));
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-badge strong {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-badge span {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    .divider {
+      width: min(92%, 1160px);
+      margin: 4px auto 20px;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.16));
+    }
+
+    .divider img {
+      width: 100%;
+      display: block;
+    }
+
+    section { padding: 8px 0 30px; }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      color: var(--text-soft);
+      font-size: 1.03rem;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .image-panel {
+      height: 100%;
+      min-height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      background-color: rgba(17, 24, 39, 0.76);
+    }
+
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .content-card {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .content-card p {
+      color: var(--text-soft);
+      font-size: 1rem;
+    }
+
+    .feature-list {
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-list li {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--surface-2);
+      border: 1px solid rgba(147, 197, 253, 0.12);
+      color: var(--text-soft);
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cards-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .alignment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .alignment-card {
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .alignment-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+      color: var(--blue-soft);
+    }
+
+    .alignment-card p {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      margin-bottom: 0;
+    }
+
+    .info-card,
+    .process-card { padding: 30px; min-height: 100%; }
+
+    .stack-card { padding: 24px; min-height: 220px; }
+
+    .info-card h3,
+    .process-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--blue-soft);
+    }
+
+    .stack-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .info-card p,
+    .stack-card p,
+    .process-card p {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      margin-bottom: 0;
+    }
+
+    .stack-card strong {
+      display: inline-block;
+      color: var(--blue-soft);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .quote-band {
+      padding: 36px;
+      text-align: center;
+      font-size: clamp(1.3rem, 2vw, 2rem);
+      font-style: italic;
+      color: var(--blue-soft);
+    }
+
+    .footer-cta {
+      position: relative;
+      min-height: 520px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(147, 197, 253, 0.18);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(10, 18, 31, 0.22), rgba(10, 18, 31, 0.68)),
+        url("assets/build-together-construction.png") center center / cover no-repeat;
+      display: grid;
+      align-items: end;
+    }
+
+    .footer-cta-copy {
+      padding: 48px;
+      max-width: 760px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(96, 165, 250, 0.6);
+      background: rgba(15, 23, 36, 0.85);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(226, 236, 255, 0.9);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--blue-soft);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+    }
+
+    .form-status {
+      min-height: 24px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .form-status.success {
+      color: #bde7c8;
+    }
+
+    .form-status.error {
+      color: #ffd0d0;
+    }
+
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 860px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-cta h2 {
+      font-size: clamp(2.4rem, 4vw, 4.4rem);
+      line-height: 0.95;
+      margin-bottom: 14px;
+    }
+
+    .footer-cta p {
+      color: rgba(238, 244, 255, 0.88);
+      font-size: 1.05rem;
+      max-width: 56ch;
+      margin-bottom: 24px;
+    }
+
+    .footer-bar {
+      padding: 28px 0 40px;
+      color: rgba(226, 236, 255, 0.62);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .animate {
+      opacity: 0;
+      transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+      filter: blur(8px);
+      will-change: transform, opacity;
+    }
+
+    .from-left { transform: translateX(-48px); }
+    .from-right { transform: translateX(48px); }
+    .from-bottom { transform: translateY(44px); }
+
+    .animate.in-view {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+      filter: blur(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .split-grid,
+      .cards-4,
+      .cards-3,
+      .hero-notes {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cards-4 .stack-card:last-child,
+      .cards-3 .info-card:last-child {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid,
+      .split-grid,
+      .cards-4,
+      .cards-3,
+      .hero-notes,
+      .alignment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .image-panel,
+      .footer-cta {
+        min-height: unset;
+      }
+
+      .hero-copy,
+      .content-card,
+      .quote-band,
+      .footer-cta-copy {
+        padding: 30px;
+      }
+
+      h1 { max-width: 13ch; }
+
+      .cards-4 .stack-card:last-child,
+      .cards-3 .info-card:last-child {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-shell">
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-mark">
+      <img src="assets/logo.png" alt="Innovative Precision Technologies Logo" style="height:64px;width:auto;">
+      <div class="brand-text">
+        <strong style="font-size:1rem;">Innovative Precision Technologies</strong>
+        <span style="font-size:0.75rem;color:rgba(226,236,255,0.72);">
+          Your Total Technology Partner. Driven by Innovation. Delivered with Precision.
+        </span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#where-we-fit">Where We Fit</a>
+      <a href="#healthcare">Healthcare</a>
+      <a href="#commercial">Commercial</a>
+      <a href="#stack">Platform</a>
+      <a href="#build">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero container">
+    <div class="hero-grid">
+      <div class="glass-card hero-copy animate from-left">
+        <h1>Your Total Technology Partner.</h1>
+        <h1>Driven by Innovation.</h1>
+        <h1>Delivered with Precision.</h1>
+        <p class="lead">
+          Innovative Precision Technologies blends infrastructure, security, networking, cloud strategy, and white-glove support into one polished delivery model for commercial, residential, and project-based environments.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#where-we-fit">Explore Services</a>
+          <a class="btn" href="#build">Start a Conversation</a>
+        </div>
+        <div class="hero-notes">
+          <div class="hero-note">
+            <strong>Infrastructure</strong>
+            <span>Architecture-minded systems delivery shaped by real operational experience.</span>
+          </div>
+          <div class="hero-note">
+            <strong>Security</strong>
+            <span>Protection designed into the environment, not layered on after the fact.</span>
+          </div>
+          <div class="hero-note">
+            <strong>Cloud & Network</strong>
+            <span>Practical modernization guided by resilience, visibility, and uptime.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card hero-visual animate from-right">
+        <div class="hero-badge">
+          <strong>Built for elevated and regulated environments</strong>
+          <span>Commercial operations, healthcare and hospital environments, financial and investment organizations, executive residences, cybersecurity services, and project-led technology integration.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section id="where-we-fit" class="container">
+    <div class="split-grid">
+      <div class="image-panel animate from-left">
+        <img src="assets/where-we-fit.png" alt="Technology alignment for residential, commercial, healthcare, and financial environments" />
+      </div>
+
+      <div class="glass-card content-card animate from-right">
+        <p class="eyebrow">Where We Fit</p>
+        <h2>We design and support environments with security built in from the start.</h2>
+        <p>
+          We approach technology through the lens of risk, resilience, and operational integrity. Every environment is assessed, designed, secured, and supported based on real-world demands, not templated service models.
+        </p>
+        <p>
+          Our work spans infrastructure, cybersecurity, networking, cloud, and support operations, allowing us to deliver stable, secure, and accountable outcomes across residential, commercial, healthcare, and high-trust business environments.
+        </p>
+
+        <div class="alignment-grid">
+          <article class="glass-card alignment-card">
+            <h3>Residential & Home Office Technology</h3>
+            <p>Secure connectivity, endpoint protection, backup, and support for modern home, remote work, and executive environments.</p>
+          </article>
+          <article class="glass-card alignment-card">
+            <h3>Commercial Business Operations</h3>
+            <p>Stable infrastructure, cloud, identity, endpoint, support, and continuity services for growing businesses.</p>
+          </article>
+          <article class="glass-card alignment-card">
+            <h3>Healthcare & Regulated Environments</h3>
+            <p>Security and compliance-aligned technology for medical, dental, outpatient, inpatient, urgent care, and adjacent regulated practices.</p>
+          </article>
+          <article class="glass-card alignment-card">
+            <h3>Financial & Investment Environments</h3>
+            <p>Higher-touch security, privacy, continuity, and advisory support for firms where trust and confidentiality are critical.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section id="healthcare" class="container">
+    <div class="split-grid">
+      <div class="glass-card content-card animate from-left">
+        <p class="eyebrow">Healthcare & Regulated Environments</p>
+        <h2>Technology built for environments where failure is not an option.</h2>
+        <p>
+          Healthcare and regulated organizations need more than generic IT support. They need secure, stable, and well-structured environments aligned with clinical operations, compliance expectations, and the realities of high-impact daily use.
+        </p>
+        <p>
+          Innovative Precision Technologies brings over 21 years of real-world experience supporting medical and hospital-based technology environments, with a delivery model shaped by uptime demands, operational accountability, and security-first design.
+        </p>
+        <ul class="feature-list">
+          <li>Aligned with <b>HIPAA</b>, <b>HITECH</b>, <b>NIST</b>, and <b>SOC 2</b> expectations</li>
+          <li>Relevant to dental, outpatient, inpatient, urgent care, aesthetics, and adjacent regulated practices</li>
+          <li>Infrastructure, endpoint, identity, and backup strategies designed with compliance and audit readiness in mind</li>
+          <li>Operational support built around uptime, continuity, and real-world patient-impact awareness</li>
+        </ul>
+        <div class="hero-note" style="margin-top:16px;">
+          <strong>Built on Real-World Healthcare Experience</strong>
+          <span>
+            Over two decades of hands-on experience supporting clinical and hospital environments where uptime, security, and operational continuity directly impact patient care.
+          </span>
+        </div>
+      </div>
+      <div class="image-panel animate from-right">
+        <img src="assets/healthcare-regulated-environments.png" alt="Modern healthcare environment with clean clinical design and advanced technology systems" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section id="commercial" class="container">
+    <div class="split-grid">
+      <div class="image-panel animate from-left">
+        <img src="assets/network-services.png" alt="Skilled technician performing services at a server rack." />
+      </div>
+      <div class="glass-card content-card animate from-right">
+        <p class="eyebrow">Commercial Technology Services</p>
+        <h2>Built for performance.</h2>
+        <h2>Operated with precision.</h2>
+        <ul class="feature-list">
+          <li>Structured technology support backed by proven operational processes and tooling</li>
+          <li>Coverage across infrastructure, systems, networking, security, and cloud environments</li>
+          <li>Designed for organizations that need dependable performance, clear accountability, and scalable support</li>
+          <li>Ideal for businesses that value responsiveness, consistency, and trust</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section id="stack" class="container">
+    <div class="section-head animate from-bottom">
+      <p class="eyebrow">Service Platform</p>
+      <h2>Built on proven systems. Delivered with precision.</h2>
+      <p>
+        Our delivery model is supported by a carefully selected platform of enterprise-grade tools across security, monitoring, documentation, and recovery. These systems are not the service, they enable consistent execution, visibility, and reliable outcomes across every environment we support.
+      </p>
+    </div>
+
+    <div class="cards-4">
+      <article class="glass-card stack-card animate from-left">
+        <strong>Endpoint Protection</strong>
+        <h3>SentinelOne Complete</h3>
+        <p>Advanced endpoint detection and response designed to prevent, detect, and contain threats in real time.</p>
+      </article>
+      <article class="glass-card stack-card animate from-left">
+        <strong>Remote Operations</strong>
+        <h3>ConnectWise RMM & ScreenConnect</h3>
+        <p>Secure remote management and support delivery that keeps systems maintained without disrupting operations.</p>
+      </article>
+      <article class="glass-card stack-card animate from-bottom">
+        <strong>Continuity & Recovery</strong>
+        <h3>Cove Backup</h3>
+        <p>Reliable backup and recovery strategies designed to protect data and ensure rapid restoration when it matters most.</p>
+      </article>
+      <article class="glass-card stack-card animate from-right">
+        <strong>Email & Identity Security</strong>
+        <h3>Proofpoint & Keeper</h3>
+        <p>Layered protection for email and credentials to reduce risk, prevent compromise, and strengthen user-level security.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section class="container">
+    <div class="glass-card quote-band animate from-bottom">
+      <p class="section-intro">Secure. Stable. Resilient. Built to hold up when it matters most.</p>
+    </div>
+  </section>
+
+  <div class="divider"><img src="assets/section-divider-gold-line.png" alt="Divider line" /></div>
+
+  <section id="build" class="container">
+    <div class="footer-cta animate from-bottom">
+      <div class="footer-cta-copy">
+        <p class="eyebrow">Project Delivery & Technology Integration</p>
+        <h2>Let’s build something together.</h2>
+        <p>
+          From new environments to modernization efforts, we partner with you to design, implement, and support technology solutions that align with your goals and scale with your needs.
+        </p>
+        <form class="contact-form" id="contactForm" action="#" method="post" novalidate>
+          <div class="form-grid">
+            <input type="text" name="name" placeholder="Full Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="tel" name="phone" placeholder="Phone Number" />
+          </div>
+          <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <textarea name="message" rows="4" placeholder="Message" required></textarea>
+          <button type="submit" class="btn">Start the Conversation</button>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
+          <div class="form-note">We respect your time and privacy. No spam. No unnecessary follow-up.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="container footer-bar" style="text-align:center; display:flex; flex-direction:column; gap:6px; padding:20px 0;">
+  <div>© 2026 Innovative Precision Technologies. All rights reserved.</div>
+</footer>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.16 });
+
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  const CONTACT_EMAIL = "hello@precisioninnovationtechnologies.com";
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (payload.company) {
+        formStatus.textContent = 'Submission blocked.';
+        formStatus.className = 'form-status error';
+        return;
+      }
+
+      if (!payload.name || !payload.email || !payload.message) {
+        formStatus.textContent = 'Please complete the required fields.';
+        formStatus.className = 'form-status error';
+        return;
+      }
+
+      const subject = encodeURIComponent('New IPT Website Inquiry');
+      const body = encodeURIComponent(
+`Name: ${payload.name}
+Email: ${payload.email}
+Phone: ${payload.phone || ''}
+
+Message:
+${payload.message}`
+      );
+
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      formStatus.textContent = 'Your default mail app should open with your message populated.';
+      formStatus.className = 'form-status success';
+    });
+  }
+</script>
+</body>
+</html>
